@@ -11,8 +11,8 @@
     "url": "neo4j-chartist"
   },
   "keywords": [
-    "\"Neo4j\"",
-    "\"Chartist\""
+    "Neo4j",
+    "Chartist"
   ],
   "author": "Adam Mackintosh",
   "license": "GPL-3.0"

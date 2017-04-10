@@ -38,7 +38,7 @@ const server = new Hapi.Server();
 server.connection({port: 3000, host: 'localhost'});
 
 // Vision controls view templates and handlebars is the templating engine
-server.register(require('vision'), (err) => {
+server.register([require('vision'), require('inert')], (err) => {
 
     Hoek.assert(!err, err);
 
@@ -48,13 +48,22 @@ server.register(require('vision'), (err) => {
         },
         // Use templates folder for view templates
         relativeTo: __dirname,
-        path: '../templates'
+        path: './templates'
+    });
+
+    server.route({
+        method: 'GET',
+        path: '/public/layout.css',
+        handler: function (request, reply) {
+            // reply.file() expects the file path as parameter
+            reply.file('./public/layout.css')
+        }
     });
 
     server.route({
         method: 'GET',
         path: '/',
-        handler: function(request, reply) {
+        handler: (request, reply) => {
             reply.view('index');
         }
     });
